@@ -6,3 +6,4 @@ bin/
 .checkstyle
 .DS_Store
 .idea
+*.iml
