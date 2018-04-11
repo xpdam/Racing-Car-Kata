@@ -3,12 +3,29 @@ package tddmicroexercises.tirepressuremonitoringsystem;
 
 import org.junit.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class TestAlarm {
+    private Alarm alarm;
+    private Sensor sensor = mock(Sensor.class);
+
+    @Before
+    public void setUp() {
+        alarm = new Alarm();
+    }
 
     @Test
     public void alarmShouldBeOffOnStartup() {
-        Alarm alarm = new Alarm();
+        assertFalse(alarm.isAlarmOn());
+    }
+
+    @Test
+    public void alarmShouldBeOffOnPressureBetweenThresholds() {
+        when(sensor.popNextPressurePsiValue()).thenReturn(19.0);
+        alarm.sensor = sensor;
+
+        alarm.check();
+
         assertFalse(alarm.isAlarmOn());
     }
 }
