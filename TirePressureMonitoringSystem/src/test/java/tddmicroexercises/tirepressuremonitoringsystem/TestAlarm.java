@@ -11,7 +11,7 @@ public class TestAlarm {
 
     @Before
     public void setUp() {
-        alarm = new Alarm();
+        alarm = new Alarm(sensor);
     }
 
     @Test
@@ -22,7 +22,6 @@ public class TestAlarm {
     @Test
     public void alarmShouldBeOffAfterCheckOnPressureBetweenThresholds() {
         when(sensor.popNextPressurePsiValue()).thenReturn(19.);
-        alarm.sensor = sensor;
 
         alarm.check();
 
@@ -32,7 +31,6 @@ public class TestAlarm {
     @Test
     public void alarmShouldBeOnAfterCheckOnPressureBelowLowerThreshold() {
         when(sensor.popNextPressurePsiValue()).thenReturn(15.);
-        alarm.sensor = sensor;
 
         alarm.check();
 
@@ -42,7 +40,6 @@ public class TestAlarm {
     @Test
     public void alarmShouldBeOnAfterCheckOnPressureAboveHigherThreshold() {
         when(sensor.popNextPressurePsiValue()).thenReturn(25.);
-        alarm.sensor = sensor;
 
         alarm.check();
 
