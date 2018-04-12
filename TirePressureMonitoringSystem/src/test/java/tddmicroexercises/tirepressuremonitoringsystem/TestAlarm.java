@@ -28,4 +28,14 @@ public class TestAlarm {
 
         assertFalse(alarm.isAlarmOn());
     }
+
+    @Test
+    public void alarmShouldBeOnAfterCheckOnPressureBelowLowerThreshold() {
+        when(sensor.popNextPressurePsiValue()).thenReturn(15.);
+        alarm.sensor = sensor;
+
+        alarm.check();
+
+        assertTrue(alarm.isAlarmOn());
+    }
 }
