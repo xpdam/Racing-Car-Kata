@@ -20,8 +20,8 @@ public class TestAlarm {
     }
 
     @Test
-    public void alarmShouldBeOffOnPressureBetweenThresholds() {
-        when(sensor.popNextPressurePsiValue()).thenReturn(19.0);
+    public void alarmShouldBeOffAfterCheckOnPressureBetweenThresholds() {
+        when(sensor.popNextPressurePsiValue()).thenReturn(19.);
         alarm.sensor = sensor;
 
         alarm.check();
