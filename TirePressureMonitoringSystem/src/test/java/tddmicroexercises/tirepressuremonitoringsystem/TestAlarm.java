@@ -7,7 +7,7 @@ import static org.mockito.Mockito.*;
 
 public class TestAlarm {
     private Alarm alarm;
-    private Sensor sensor = mock(Sensor.class);
+    private ISensor sensor = mock(ISensor.class);
 
     @Before
     public void setUp() {
