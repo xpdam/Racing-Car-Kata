@@ -45,4 +45,14 @@ public class TestAlarm {
 
         assertTrue(alarm.isAlarmOn());
     }
+
+    @Test
+    public void pressureThresholdsShouldBeCustomizable() {
+        when(sensor.popNextPressurePsiValue()).thenReturn(100.);
+        alarm = new Alarm(sensor, 99, 101);
+
+        alarm.check();
+
+        assertFalse(alarm.isAlarmOn());
+    }
 }
