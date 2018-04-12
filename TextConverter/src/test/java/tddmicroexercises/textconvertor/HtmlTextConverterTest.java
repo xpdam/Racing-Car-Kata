@@ -5,9 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class HtmlTextConverterTest {
+    private String tempFileName = "foo.txt";
+
     @Test
-    public void foo() {
-        HtmlTextConverter converter = new HtmlTextConverter("foo");
-        assertEquals("fixme", converter.getFilename());
+    public void getFileNameShouldReturnTheGivenFileName() {
+        HtmlTextConverter converter = new HtmlTextConverter(tempFileName);
+        assertEquals(tempFileName, converter.getFilename());
     }
 }
