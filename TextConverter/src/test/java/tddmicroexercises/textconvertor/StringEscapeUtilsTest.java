@@ -10,4 +10,12 @@ public class StringEscapeUtilsTest {
     public void shouldReturnEmptyStringOnEmptyInput() {
         assertEquals("", escapeHtml(""));
     }
+
+    @Test
+    public void shouldReturnEscapedString() {
+        String rawString = "& < > \" '";
+
+        String expected = "&amp; &lt; &gt; &quot; &quot;";
+        assertEquals(expected, escapeHtml(rawString));
+    }
 }
