@@ -16,6 +16,8 @@ public class TestAlarm {
 
     @Test
     public void alarmShouldBeOffOnStartup() {
+        alarm = new Alarm();
+
         assertFalse(alarm.isAlarmOn());
     }
 
