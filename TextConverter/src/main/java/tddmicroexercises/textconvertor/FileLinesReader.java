@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class FileLinesReader {
+public class FileLinesReader implements LinesReader {
     private String fullFilenameWithPath;
     private BufferedReader reader;
 

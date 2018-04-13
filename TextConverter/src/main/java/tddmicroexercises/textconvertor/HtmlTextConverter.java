@@ -4,13 +4,13 @@ import java.io.*;
 
 public class HtmlTextConverter
 {
-    private FileLinesReader reader;
+    private LinesReader reader;
 
     public HtmlTextConverter(String fullFilenameWithPath) {
         this(new FileLinesReader(fullFilenameWithPath));
     }
 
-    public HtmlTextConverter(FileLinesReader reader) {
+    public HtmlTextConverter(LinesReader reader) {
         this.reader = reader;
     }
 

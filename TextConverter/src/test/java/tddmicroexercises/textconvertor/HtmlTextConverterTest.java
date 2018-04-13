@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 
 public class HtmlTextConverterTest {
     private String tempFileName = "foo.txt";
-    private FileLinesReader reader = mock(FileLinesReader.class);
+    private LinesReader reader = mock(LinesReader.class);
 
     @Test
     public void getFileNameShouldReturnTheGivenFileName() {
