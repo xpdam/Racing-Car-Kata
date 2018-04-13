@@ -1,22 +1,20 @@
 package tddmicroexercises.textconvertor;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class HtmlTextConverter
 {
-    private String fullFilenameWithPath;
+    private FileLinesReader reader;
 
-    public HtmlTextConverter(String fullFilenameWithPath)
-    {
-        this.fullFilenameWithPath = fullFilenameWithPath;
+    public HtmlTextConverter(String fullFilenameWithPath) {
+        this(new FileLinesReader(fullFilenameWithPath));
     }
 
-    public String convertToHtml() throws IOException{
-    
-	    BufferedReader reader = new BufferedReader(new FileReader(fullFilenameWithPath));
-	    
+    public HtmlTextConverter(FileLinesReader reader) {
+        this.reader = reader;
+    }
+
+    public String convertToHtml() throws IOException {
 	    String line = reader.readLine();
 	    String html = "";
 	    while (line != null)
@@ -26,10 +24,9 @@ public class HtmlTextConverter
 	        line = reader.readLine();
 	    }
 	    return html;
-
     }
 
 	public String getFilename() {
-		return this.fullFilenameWithPath;
+		return reader.getFilename();
 	}
 }
