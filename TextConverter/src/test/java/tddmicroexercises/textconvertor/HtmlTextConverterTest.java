@@ -44,4 +44,10 @@ public class HtmlTextConverterTest {
         String expected = "First &quot;line&quot;<br />&quot;r1 &lt; 2 &amp; 2 &gt; 1&quot;<br />";
         assertEquals(expected, converter.convertToHtml());
     }
+
+    @Test(expected = IOException.class)
+    public void convertToHtmlShouldThrowIOExceptionIfFileDoesNotExist() throws IOException {
+        HtmlTextConverter converter = new HtmlTextConverter("/fileNotExisting");
+        converter.convertToHtml();
+    }
 }
