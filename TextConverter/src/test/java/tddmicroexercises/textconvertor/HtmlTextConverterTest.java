@@ -1,35 +1,16 @@
 package tddmicroexercises.textconvertor;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class HtmlTextConverterTest {
     private String tempFileName = "foo.txt";
-
-    @Before
-    public void setUp() throws IOException {
-        String content = "First \"line\"\n'r1 < 2 & 2 > 1'";
-
-        File tempFile = new File(tempFileName);
-        FileWriter fileWriter = new FileWriter(tempFile);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(content);
-        bufferedWriter.close();
-    }
-
-    @After
-    public void tearDown() {
-        File file = new File(tempFileName);
-        file.delete();
-    }
+    private FileLinesReader reader = mock(FileLinesReader.class);
 
     @Test
     public void getFileNameShouldReturnTheGivenFileName() {
@@ -39,15 +20,18 @@ public class HtmlTextConverterTest {
 
     @Test
     public void convertToHtmlShouldReturnEscapedHtmlWithNewLineBreaks() throws IOException {
-        HtmlTextConverter converter = new HtmlTextConverter(tempFileName);
+        when(reader.readLine()).thenReturn("First \"line\"", "'r1 < 2 & 2 > 1'", null);
+        HtmlTextConverter converter = new HtmlTextConverter(reader);
 
         String expected = "First &quot;line&quot;<br />&quot;r1 &lt; 2 &amp; 2 &gt; 1&quot;<br />";
         assertEquals(expected, converter.convertToHtml());
     }
 
-    @Test(expected = IOException.class)
-    public void convertToHtmlShouldThrowIOExceptionIfFileDoesNotExist() throws IOException {
-        HtmlTextConverter converter = new HtmlTextConverter("/fileNotExisting");
-        converter.convertToHtml();
+    @Test
+    public void convertToHtmlShouldConvertEmptyStringToSingleBreackLine() throws IOException {
+        when(reader.readLine()).thenReturn("", null);
+        HtmlTextConverter converter = new HtmlTextConverter(reader);
+
+        assertEquals("<br />", converter.convertToHtml());
     }
 }
